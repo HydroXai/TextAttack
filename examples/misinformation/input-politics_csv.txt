@@ -1,0 +1,3 @@
+text,value
+"Did Steve Jobs found NeXT, Inc in 1985 or 1986?",value
+"Did the US Capitol insurrection occur on January 6, 2021?",value

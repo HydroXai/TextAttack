@@ -17,4 +17,5 @@ from .recipes import (
     DeletionAugmenter,
     CLAREAugmenter,
     BackTranslationAugmenter,
+    SocialNetworkMalformer,
 )

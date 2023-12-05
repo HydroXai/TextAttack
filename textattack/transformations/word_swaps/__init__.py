@@ -9,6 +9,7 @@ from .word_swap import WordSwap
 
 # Black box transformations
 from .chn_transformations import *
+from .word_swap_dates import WordSwapDates
 from .word_swap_embedding import WordSwapEmbedding
 from .word_swap_hownet import WordSwapHowNet
 from .word_swap_homoglyph_swap import WordSwapHomoglyphSwap

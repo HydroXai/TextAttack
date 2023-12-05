@@ -252,6 +252,17 @@ class CLAREAugmenter(Augmenter):
         super().__init__(transformation, constraints=constraints, **kwargs)
 
 
+class SocialNetworkMalformer(Augmenter):
+    """Augmenter that produces malformed queries based on social networks.
+    """
+
+    def __init__(self, **kwargs):
+        from textattack.transformations import WordSwapDates
+
+        transformation = WordSwapDates()
+        super().__init__(transformation, **kwargs)
+
+
 class BackTranslationAugmenter(Augmenter):
     """Sentence level augmentation that uses MarianMTModel to back-translate.
 
