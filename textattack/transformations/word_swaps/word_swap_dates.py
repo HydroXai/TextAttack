@@ -30,7 +30,6 @@ class WordSwapDates(WordSwap):
 
 
     def _get_replacement_words(self, word):
-        print("Calling _get_replacement_words; word: ", word)
         replacement_words = []
         if self.max_year_shift > 0:
             m = re.match(r"\d{4}", word)
@@ -39,7 +38,6 @@ class WordSwapDates(WordSwap):
                 year_shift = random.randint(self.min_year_shift, self.max_year_shift)
                 new_year = year + year_shift
                 new_word = str(new_year)
-                print("year: ", year, "; year_shift: ", year_shift, "; new_year: ", new_year, "; new_word: ", new_word)
                 replacement_words.append(new_word)
 
         months = {"january": 0, 
