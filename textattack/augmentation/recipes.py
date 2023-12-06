@@ -257,9 +257,24 @@ class SocialNetworkMalformer(Augmenter):
     """
 
     def __init__(self, **kwargs):
-        from textattack.transformations import WordSwapDates
+        from textattack.transformations import (
+            CompositeTransformation,
+            SocialNetworkTransformation,
+            WordSwapDates,
+        )
 
-        transformation = WordSwapDates()
+        transformation = CompositeTransformation(
+            [
+                SocialNetworkTransformation(
+                    swap_persons=True,
+                    swap_organizations=False,
+                    swap_geo_political_entities=False,
+                    depth=1,
+                ),
+                WordSwapDates(),
+            ]
+        )
+
         super().__init__(transformation, **kwargs)
 
 
@@ -271,6 +286,6 @@ class BackTranslationAugmenter(Augmenter):
 
     def __init__(self, **kwargs):
         from textattack.transformations.sentence_transformations import BackTranslation
+        transformation = BackTranslation(chained_back_translation=2)
 
-        transformation = BackTranslation(chained_back_translation=5)
         super().__init__(transformation, **kwargs)
