@@ -50,7 +50,7 @@ extras["dev"] = (
 setuptools.setup(
     name="textattack",
     version=docs_conf.release,
-    author="QData Lab at the University of Virginia",
+    author="QData Lab at the University of Virginia. Forked by HydroXai",
     author_email="jm8wx@virginia.edu",
     description="A library for generating text adversarial examples",
     include_package_data=False,
