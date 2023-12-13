@@ -103,18 +103,31 @@ class EntityExtraction():
                         tree_node_label = ""
                                     
 
-        # Do a final filter to get rid of relative relationships (e.g., brother, uncle)
+        # Filter out relative relationships (e.g., brother, uncle)
         final_names = []
         for entity in full_names:
             if self.is_proper_noun(entity):
                 final_names.append(entity)
 
-        final_names = self.get_unique_full_names(final_names, uniqueNames)
+        final_names = self.dedup_full_names(final_names, uniqueNames)
+
+
+        # # Filter out duplicates and names with no spaces
+        # final_list = []
+        # for name in final_names:
+        #     print("name 1: ", name)
+        #     if name in final_list and uniqueNames:
+        #         print("name 2: ", name)
+        #         continue
+        #     if name.find(' ') != -1:
+        #         print("name 3: ", name)
+        #         final_list.append(name)
+
 
         return final_names
     
 
-    def get_unique_full_names(self, names, uniqueNames=True): 
+    def dedup_full_names(self, names, uniqueNames=True): 
         final_list = []
         for name in names:
             if name in final_list and uniqueNames:
@@ -124,6 +137,13 @@ class EntityExtraction():
 
 
         return final_list
+
+
+    def get_unique_full_names(self, text):
+        names = self.get_full_names(text, True)
+        filtered_names =  self.dedup_full_names(names, True)
+
+        return filtered_names
 
 
 
