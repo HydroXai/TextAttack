@@ -76,7 +76,7 @@ class EntityExtraction():
     ###
     # Return full names including middle names and middle initials
     # NOTE: Do not currently support double middle initials (e.g., George H.W. Bush)
-    def get_full_names(self, text): 
+    def get_full_names(self, text, unique=True): 
 
         chunks = ne_chunk(pos_tag(word_tokenize(text)))
         contiguous_chunks = []
@@ -110,7 +110,23 @@ class EntityExtraction():
                 final_names.append(entity)
         
 
+        if unique:
+            final_names = self.get_unique_full_names(final_names)
+
         return final_names
+    
+
+    def get_unique_full_names(self, names): 
+        final_list = []
+        for name in names:
+            if name in final_list:
+                continue
+            if name.find(' ') != -1:
+                final_list.append(name)
+
+
+        return final_list
+
 
 
 
