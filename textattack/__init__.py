@@ -31,6 +31,7 @@ from . import (
     loggers,
     metrics,
     models,
+    nlp,
     search_methods,
     shared,
     transformations,
