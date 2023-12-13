@@ -154,4 +154,19 @@ def test_is_proper_noun():
     assert extractor.is_proper_noun(text="Q?") == True
 
 
+def test_get_unique_full_names():
+    extractor = textattack.nlp.EntityExtraction()
+
+    names = ["Billy Bob", "Thorton", "John Doe"]
+    assert extractor.get_unique_full_names(names) == [
+        "Billy Bob",
+         "John Doe",
+    ]
+
+    names = ["Billy Bob", "Billy Bob Thorton", "John Doe"]
+    assert extractor.get_unique_full_names(names, False) == [
+        "Billy Bob",
+        "Billy Bob Thorton",
+         "John Doe",
+    ]
 
