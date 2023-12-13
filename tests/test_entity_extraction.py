@@ -170,3 +170,10 @@ def test_get_unique_full_names():
          "John Doe",
     ]
 
+    names = ['Joe Biden', 'Uncle', 'Robert Biden', 'Barack Obama', 'Father', 'Barack Obama Sr.', 'Joe Biden']
+    assert extractor.get_unique_full_names(names, True) == [
+        "Joe Biden",
+        "Robert Biden",
+        "Barack Obama", 
+        "Barack Obama Sr.",
+    ]
