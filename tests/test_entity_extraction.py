@@ -144,3 +144,14 @@ def test_get_just_full_names3(extracted_just_names3):
         "Andrew Ross Sorokin",
     ]
 
+def test_is_proper_noun():
+    extractor = textattack.nlp.EntityExtraction()
+    assert extractor.is_proper_noun(text="Uncle") == False
+    assert extractor.is_proper_noun(text="sister") == False
+    assert extractor.is_proper_noun(text="Brother") == False
+    assert extractor.is_proper_noun(text="W.") == True
+    assert extractor.is_proper_noun(text="Q,") == True
+    assert extractor.is_proper_noun(text="Q?") == True
+
+
+

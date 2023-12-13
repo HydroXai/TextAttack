@@ -4,7 +4,7 @@ EntityExtraction class
 
 import re
 
-from nltk import ne_chunk, pos_tag, word_tokenize
+from nltk import ne_chunk, pos_tag, word_tokenize, tree2conlltags
 from nltk.tree import Tree
 
 
@@ -16,7 +16,7 @@ class EntityExtraction():
         self.exclude_punct = exclude_punct
 
     def get_orgs_or_locations(self, text, entity_type): 
-        punctuation_regex = re.compile(r'[^\W]')
+        punctuation_regex = re.compile(r'[^\W]')   # Not alphanumeric (will match with punctuation)
 
         chunks = ne_chunk(pos_tag(word_tokenize(text)))
         contiguous_chunks = []
@@ -54,6 +54,25 @@ class EntityExtraction():
         return self.get_orgs_or_locations(text, entity_type="ORGANIZATION")
 
 
+    def is_proper_noun(self, text):
+        punctuation_regex = re.compile(r'[\W]')    # Non-alphanumeric
+        chunks = ne_chunk(pos_tag(word_tokenize(text)))
+
+        for chunk in chunks:
+            if type(chunk) == Tree:
+                parts = tree2conlltags(chunk)
+                if parts[0][1] != 'NNP' and parts[0][1] != 'NNPS':
+                    return False
+            else: 
+                match = re.match(punctuation_regex, chunk[0])
+                if match:   # Let's ignore non-alphanumeric characters
+                    continue
+                if chunk[1] != 'NNP' and chunk[1] != 'NNPS':
+                    return False
+            
+        return True
+        
+
     ###
     # Return full names including middle names and middle initials
     # NOTE: Do not currently support double middle initials (e.g., George H.W. Bush)
@@ -83,7 +102,15 @@ class EntityExtraction():
                         contiguous_chunks = []
                         tree_node_label = ""
                                     
-        return full_names
+
+        # Do a final filter to get rid of relative relationships (e.g., brother, uncle)
+        final_names = []
+        for entity in full_names:
+            if self.is_proper_noun(entity):
+                final_names.append(entity)
+        
+
+        return final_names
 
 
 
