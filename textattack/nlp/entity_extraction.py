@@ -15,14 +15,11 @@ class EntityExtraction():
     ):
         self.exclude_punct = exclude_punct
 
-    @staticmethod
-    def get_contiguous_chunks(text, entity_type="PERSON"): 
+    def get_orgs_or_locations(self, text, entity_type): 
         punctuation_regex = re.compile(r'[^\W]')
-        print("text: ", text)
 
         chunks = ne_chunk(pos_tag(word_tokenize(text)))
         contiguous_chunks = []
-        processed_chunk = []
         processed_chunks = []
         tree_node_label =  ""
 
@@ -33,38 +30,61 @@ class EntityExtraction():
                 contiguous_chunks.append(current_chunk)
                 if len(tree_node_label) == 0:
                     tree_node_label = chunk.label()
-                print("current_chunk: ", current_chunk, "; label: ", chunk.label(), "; tree_node_label: ", tree_node_label)
 
             else:
                 # First handle remaining contiguous chunks
                 if len(tree_node_label) > 0:
                     current_chunk = ' '.join(contiguous_chunks)
                     match = re.match(punctuation_regex, current_chunk)
-                    if match: 
-                        # if tree_node_label == "PERSON" and self.swap_persons:
-                        #     current_chunk = self.get_alt_person(current_chunk)
-                        # elif tree_node_label == "ORGANIZATION" and self.swap_organizations:
-                        #     current_chunk = self.get_alt_organization(current_chunk)
-                        # elif tree_node_label == "GPE" and self.swap_geo_political_entities:
-                        #     current_chunk = self.get_alt_geo_political_entity(current_chunk)
-                        
-                        print("current_chunk: ", current_chunk, " tree_node_label: ", tree_node_label, "; entity_type: ", entity_type)
+                    if match:                         
                         if tree_node_label == entity_type: 
                             processed_chunks.append(current_chunk)
                         
                     contiguous_chunks = []
                     tree_node_label = ""
-
-
-                # # Next handle current chunk (not a tree)
-                # processed_chunk = chunk[0]
-
-                # # Ignore punctuation
-                # match = re.match(punctuation_regex, processed_chunk)
-                # if match: 
-                #     processed_chunks.append(processed_chunk)
             
-        # tree_node_label = ""
         return processed_chunks
 
 
+    def get_locations(self, text): 
+        return self.get_orgs_or_locations(text, entity_type="GPE")
+
+
+    def get_organizations(self, text): 
+        return self.get_orgs_or_locations(text, entity_type="ORGANIZATION")
+
+
+    ###
+    # Return full names including middle names and middle initials
+    # NOTE: Do not currently support double middle initials (e.g., George H.W. Bush)
+    def get_full_names(self, text): 
+
+        chunks = ne_chunk(pos_tag(word_tokenize(text)))
+        contiguous_chunks = []
+        full_names = []
+        tree_node_label =  ""
+
+        for chunk in chunks:
+            if type(chunk) == Tree and chunk.label() == "PERSON":
+                current_chunk = ' '.join([token for token, pos in chunk.leaves()])
+                contiguous_chunks.append(current_chunk)
+                if len(tree_node_label) == 0:
+                    tree_node_label = chunk.label()
+
+            else:
+                # First handle remaining contiguous chunks
+                if len(tree_node_label) > 0:
+                    if chunk[1] == 'NNP' or chunk[1] == 'NNPS':
+                        contiguous_chunks.append(chunk[0])
+                        continue
+                    else: 
+                        current_chunk = ' '.join(contiguous_chunks)
+                        full_names.append(current_chunk)
+                        contiguous_chunks = []
+                        tree_node_label = ""
+                                    
+        return full_names
+
+
+
+        
