@@ -252,6 +252,30 @@ class CLAREAugmenter(Augmenter):
         super().__init__(transformation, constraints=constraints, **kwargs)
 
 
+class PairedTruthsMalformer(Augmenter):
+    """Augmenter that produces malformed queries based on paired true statements.
+    """
+
+    def __init__(self, **kwargs):
+        from textattack.transformations import (
+            CompositeTransformation,
+            PairedTruthsTransformation,
+            WordSwapDates,
+        )
+
+        transformation = CompositeTransformation(
+            [
+                PairedTruthsTransformation(
+                    delimiter=":::",
+                    swap_persons=True,
+                ),
+                WordSwapDates(),
+            ]
+        )
+
+        super().__init__(transformation, **kwargs)
+
+
 class SocialNetworkMalformer(Augmenter):
     """Augmenter that produces malformed queries based on social networks.
     """
