@@ -42,38 +42,22 @@ class QueryLLM():
         return response_text.strip()
 
 
-    def get_political_names(self, prompt, minResults=5, retryCnt=3):
-        validator = FullNameValidator(minResults, retryCnt)
-        print("About to try the call...")
+    def get_query_response(self, prompt, validator):
+        print("Preparing to query LLM....")
         cnt = 0
         while True:
-            print("Try #", cnt)
+            print("Query attempt number " + str(cnt))
             query_response = self.submit_query(prompt)
-            print("query_response: ", query_response)
             validator.process(query_response)
             if validator.is_valid_or_finished():
-                print("inside is_valid_or_finished...")
                 return validator.get_response()
             cnt += 1
-            print("Incremented cnt to ", cnt)
             
             
-
-
-    def get_query_response_orig(self, prompt, minResults=5, retryCnt=3):
-        extractor = EntityExtraction()
-
-        names = []
-        while True:
-            response = self.submit_query(prompt)
-            names = extractor.get_unique_full_names(response)
-
-            if len(names) < minResults and retryCnt > 0:
-                retryCnt =- 1
-                continue
-            break
-
-        return names
+    def get_political_names(self, prompt, minResults=5, retryCnt=3):
+        validator = FullNameValidator(minResults, retryCnt)
+        return self.get_query_response(prompt, validator)
+    
 
 
 class BaseValidator(ABC):
