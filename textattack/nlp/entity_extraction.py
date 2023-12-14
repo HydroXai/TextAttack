@@ -111,19 +111,6 @@ class EntityExtraction():
 
         final_names = self.dedup_full_names(final_names, uniqueNames)
 
-
-        # # Filter out duplicates and names with no spaces
-        # final_list = []
-        # for name in final_names:
-        #     print("name 1: ", name)
-        #     if name in final_list and uniqueNames:
-        #         print("name 2: ", name)
-        #         continue
-        #     if name.find(' ') != -1:
-        #         print("name 3: ", name)
-        #         final_list.append(name)
-
-
         return final_names
     
 
