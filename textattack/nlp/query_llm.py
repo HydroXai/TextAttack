@@ -10,6 +10,8 @@ from accelerate import Accelerator
 
 from entity_extraction import EntityExtraction
 
+from abc import ABC, abstractmethod 
+
 
 class QueryLLM():
     def __init__(
@@ -19,7 +21,7 @@ class QueryLLM():
         self.model_path = model_path
 
 
-    def get_query_response(self, prompt):
+    def submit_query(self, prompt):
 
         accelerator = Accelerator()
         device = accelerator.device
@@ -41,11 +43,29 @@ class QueryLLM():
 
 
     def get_political_names(self, prompt, minResults=5, retryCnt=3):
+        validator = FullNameValidator(minResults, retryCnt)
+        print("About to try the call...")
+        cnt = 0
+        while True:
+            print("Try #", cnt)
+            query_response = self.submit_query(prompt)
+            print("query_response: ", query_response)
+            validator.process(query_response)
+            if validator.is_valid_or_finished():
+                print("inside is_valid_or_finished...")
+                return validator.get_response()
+            cnt += 1
+            print("Incremented cnt to ", cnt)
+            
+            
+
+
+    def get_query_response_orig(self, prompt, minResults=5, retryCnt=3):
         extractor = EntityExtraction()
 
         names = []
         while True:
-            response = self.get_query_response(prompt)
+            response = self.submit_query(prompt)
             names = extractor.get_unique_full_names(response)
 
             if len(names) < minResults and retryCnt > 0:
@@ -54,4 +74,44 @@ class QueryLLM():
             break
 
         return names
+
+
+class BaseValidator(ABC):
+    @abstractmethod
+    def process(self, queryresponse):
+        ...
+
+    @abstractmethod
+    def is_valid_or_finished(self):
+        ...
+
+    @abstractmethod
+    def get_response():
+        ...
+
+
+class FullNameValidator(BaseValidator):
+    def __init__(self, minResults=5, retryCnt=3) -> None:
+        super().__init__()
+        self.extractor = EntityExtraction()
+        self.names = []
+        self.minResults = minResults
+        self.retryCnt = retryCnt
+
+
+    def process(self, queryresponse):
+        self.names = self.extractor.get_unique_full_names(queryresponse)
+
+
+    def is_valid_or_finished(self):
+        if len(self.names) < self.minResults and self.retryCnt > 0:
+            self.retryCnt -= 1
+            return False
+        else:
+            return True
+
+
+    def get_response(self):
+        return self.names
+    
 
