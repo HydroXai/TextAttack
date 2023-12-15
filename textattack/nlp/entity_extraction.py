@@ -77,31 +77,43 @@ class EntityExtraction():
     # Return full names including middle names and middle initials
     # NOTE: Do not currently support double middle initials (e.g., George H.W. Bush)
     def get_full_names(self, text, uniqueNames=True): 
-
+        # print("Preparing to extract text: \"" + text + "\"")
         chunks = ne_chunk(pos_tag(word_tokenize(text)))
         contiguous_chunks = []
         full_names = []
         tree_node_label =  ""
 
+        # print("HERE 1")
         for chunk in chunks:
             if type(chunk) == Tree and chunk.label() == "PERSON":
+                # print("HERE 2, chunk: ", chunk)
                 current_chunk = ' '.join([token for token, pos in chunk.leaves()])
                 contiguous_chunks.append(current_chunk)
                 if len(tree_node_label) == 0:
                     tree_node_label = chunk.label()
+                # print("HERE 2a, chunk: ", chunk)
 
             else:
                 # First handle remaining contiguous chunks
                 if len(tree_node_label) > 0:
-                    if chunk[1] == 'NNP' or chunk[1] == 'NNPS':
-                        contiguous_chunks.append(chunk[0])
-                        continue
-                    else: 
-                        current_chunk = ' '.join(contiguous_chunks)
-                        full_names.append(current_chunk)
-                        contiguous_chunks = []
-                        tree_node_label = ""
+                    # print("HERE 3, chunk: ", tree_node_label)
+                    # print("HERE 3a, chunk[1]:  --> length: ", len(chunk))
+                    if len(chunk) > 1:
+                        if chunk[1] == 'NNP' or chunk[1] == 'NNPS':
+                            # print("HERE 4, chunk[1]: ", chunk[1])
+                            contiguous_chunks.append(chunk[0])
+                            continue
+
+                    # We can ignore the newest chunk as it is not part of the previous tree
+                    # print("HERE 5, contiguous_chunks: ", contiguous_chunks, "; chunk: ", chunk)
+                    current_chunk = ' '.join(contiguous_chunks)
+                    full_names.append(current_chunk)
+                    contiguous_chunks = []
+                    tree_node_label = ""
                                     
+        if len(contiguous_chunks) > 0:
+            current_chunk = ' '.join(contiguous_chunks)
+            full_names.append(current_chunk)
 
         # Filter out relative relationships (e.g., brother, uncle)
         final_names = []
@@ -110,6 +122,7 @@ class EntityExtraction():
                 final_names.append(entity)
 
         final_names = self.dedup_full_names(final_names, uniqueNames)
+        # print("Extracted text: ", final_names)
 
         return final_names
     

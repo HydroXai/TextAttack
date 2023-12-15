@@ -177,3 +177,41 @@ def test_get_full_names_params():
         "Barack Obama", 
         "Barack Obama Sr.",
     ]
+
+
+def test_get_stand_alone_names():
+    extractor = textattack.nlp.EntityExtraction()
+
+    text = "His name is James Addison Baker and he lives here."
+    assert extractor.get_unique_full_names(text) == [
+        "James Addison Baker",
+    ]
+
+    text = "His name is James Addison Baker"
+    assert extractor.get_unique_full_names(text) == [
+        "James Addison Baker",
+    ]
+
+    text = "James Addison Baker and he lives here."
+    assert extractor.get_unique_full_names(text) == [
+        "James Addison Baker",
+    ]
+
+    text = "I believe James Addison Baker lives here and so does Bill Jones."
+    assert extractor.get_unique_full_names(text) == [
+        "James Addison Baker",
+        "Bill Jones",
+    ]
+
+    text = "James Addison Baker lives here and so does Bill Jones."
+    assert extractor.get_unique_full_names(text) == [
+        "James Addison Baker",
+        "Bill Jones",
+    ]
+
+    text = "His full name is James Addison Baker III but his friend has the plain name of Bill Jones."
+    assert extractor.get_unique_full_names(text) == [
+        "James Addison Baker III",
+        "Bill Jones",
+    ]
+
