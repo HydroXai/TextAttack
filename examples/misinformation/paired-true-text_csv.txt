@@ -1,0 +1,5 @@
+text,value
+"Joe Biden served in the role of President of the United States starting in the year 2021.:::Kamala Harris served in the role of Vice President of the United States starting in the year 2021.",value
+"Hillary Clinton served in the role of First Lady of the United States starting in the year 1993.:::William Jefferson Clinton served in the role of President of the United States starting in the year 1993.",value
+"Nancy Pelosi served in the role of Speaker of the United States House of Representatives starting in the year 2007.:::Adam Schiff served in the role of the U.S. Representative for California's 28th congressional district starting in the year 2013.",value
+"Barack Obama served in the role of President of the United States starting in the year 2009.:::Joseph R. Biden Jr served in the role of the 46th President of the United States starting in the year 2021.",value
