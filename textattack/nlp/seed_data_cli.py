@@ -1,12 +1,12 @@
 """
-SeedAttackData class
+SeedData CLI class
 """
 
 
 import sys
 import argparse
 
-from generate_seed_data import GenerateSeedData
+from textattack.nlp.seed_data_generator import SeedDataGenerator
 
 
 
@@ -36,7 +36,7 @@ if __name__ == '__main__':
     print("")
     print(f"Seeding data with the following model: \"{model_path}\"")
 
-    seeder = GenerateSeedData(model_path=model_path, 
+    seeder = SeedDataGenerator(model_path=model_path, 
                             output_file=output_file,
                             standard_seed_type=standard_seed_type,
                             )

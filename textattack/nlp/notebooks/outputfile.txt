@@ -45,3 +45,43 @@ Dick Cheney served in the role of Vice President of the United States starting i
 Al Gore served in the role of Vice President of the United States starting in the year 1993.:::Bill Clinton served in the role of President of the United States starting in the year 1993.,value
 Bill Clinton served in the role of President of the United States starting in the year 1993.:::Hillary Rodham Clinton served in the role of United States Secretary of State starting in the year 2009.,value
 Sarah Palin served in the role of Governor of Alaska starting in the year 2006.:::John McCain served in the role of United States Senator for Arizona starting in the year 1987.,value
+text,value
+Ronald Reagan served in the role of the President of the United States starting in the year 1981.:::George H. W. Bush served in the role of President of the United States starting in the year 1989.,value
+George H. W. Bush served in the role of President of the United States starting in the year 1989.:::James Addison Baker III served in the role of White House Chief of Staff starting in the year 1981.
+James Addison Baker III served in the role of United States Secretary of the Treasury starting in the year 1985.
+James Addison Baker III served in the role of United States Secretary of State starting in the year 1989.,value
+Bill Clinton served in the role of the President of the United States starting in the year 1993.:::Hillary Rodham Clinton served in the role of First Lady of the United States starting in the year 1993. 
+Hillary Rodham Clinton served in the role of United States Senator from New York starting in the year 2001. 
+Hillary Rodham Clinton served in the role of United States Secretary of State starting in the year 2009.
+Hillary Rodham Clinton served in the role of Presidential Nominee for the Democratic Party starting in the year 2016.,value
+Barack Obama served in the role of President of the United States starting in the year 2009.:::Joseph R. Biden Jr served in the role of President of the United States starting in the year 2021.,value
+Donald Trump served in the role of President of the United States starting in the year 2017.:::Rudolph William Louis Giuliani served in the role of Mayor of New York City starting in the year 1994.,value
+Hillary Clinton served in the role of First Lady of the United States starting in the year 1993.:::Bill Clinton served in the role of President of the United States starting in the year 1993.,value
+Al Gore served in the role of Vice President of the United States starting in the year 1993.:::Bill Clinton served in the role of President of the United States starting in the year 1993.,value
+Nancy Pelosi served in the role of Speaker of the United States House of Representatives starting in the year 2007.:::Adam Schiff served in the role of U.S. Representative for California's 28th congressional district starting in the year 2013.,value
+Joe Biden served in the role of Vice President of the United States starting in the year 2009.:::Kamala Harris served in the role of Vice President of the United States starting in the year 2021.,value
+Kamala Harris served in the role of Vice President of the United States starting in the year 2021.:::Joseph R. Biden Jr served in the role of President of the United States starting in the year 2021.,value
+Mike Pence served in the role of Vice President of the United States starting in the year 2017.:::Donald John Trump served in the role of President of the United States starting in the year 2017.,value
+text,value
+Barack Obama served in the role of President of the United States starting in the year 2009.:::Joseph R. Biden Jr served in the role of Vice President of the United States starting in the year 2009.,value
+Donald Trump served in the role of President of the United States starting in the year 2017.:::Rudolph William Louis Giuliani served in the role of Mayor of New York City starting in the year 1994.,value
+Hillary Clinton served in the role of First Lady of the United States starting in the year 1993.:::William Jefferson Clinton served in the role of President of the United States starting in the year 1993.,value
+Ronald Reagan served in the role of President of the United States starting in the year 1981.:::George H. W. Bush served in the role of President of the United States starting in the year 1989.,value
+Al Gore served in the role of Vice President of the United States starting in the year 1993.:::Bill Clinton served in the role of President of the United States starting in the year 1993.,value
+Bill Clinton served in the role of President of the United States starting in the year 1993.:::Hillary Rodham Clinton served in the role of First Lady of the United States starting in the year 1993. 
+
+Hillary Rodham Clinton served in the role of United States Senator from New York starting in the year 2001.
+
+Hillary Rodham Clinton served in the role of United States Secretary of State starting in the year 2009.
+
+Hillary Rodham Clinton served in the role of the Democratic Party's nominee for President of the United States starting in the year 2016.,value
+Joe Biden served in the role of Vice President of the United States starting in the year 2009.:::Kamala Harris served in the role of Vice President of the United States starting in the year 2021.,value
+George H.W served in the role of 41st President of the United States starting in the year 1989.:::James Baker served in the role of White House Chief of Staff starting in the year 1981.
+James Baker served in the role of Secretary of the Treasury starting in the year 1985.
+James Baker served in the role of Secretary of State starting in the year 1989.,value
+Sarah Palin served in the role of Governor of Alaska starting in the year 2006.:::John McCain served in the role of United States Senator for Arizona starting in the year 1987.,value
+Nancy Pelosi served in the role of Speaker of the United States House of Representatives starting in the year 2007.:::Adam Schiff served in the role of U.S. Representative for California's 28th congressional district starting in the year 2013.,value
+Dick Cheney served in the role of Vice President of the United States starting in the year 2001.:::George W. Bush served in the role of President of the United States starting in the year 2001.,value
+Mike Pence served in the role of Vice President of the United States starting in the year 2017.:::Donald John Trump served in the role of President of the United States starting in the year 2017.,value
+Kamala Harris served in the role of Vice President of the United States starting in the year 2021.:::Joseph R. Biden Jr served in the role of Vice President of the United States starting in the year 2009.,value
+Ted Cruz served in the role of United States Senator from Texas starting in the year 2013.:::Marco Antonio Rubio served in the role of United States Senator from Florida starting in the year 2011.,value

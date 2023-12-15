@@ -4,12 +4,12 @@ GenerateSeedData class
 
 
 from entity_extraction import EntityExtraction
-from query_llm import QueryLLM
+from textattack.nlp.llm_client import LLMClient
 
 from abc import ABC, abstractmethod 
 
 
-class GenerateSeedData():
+class SeedDataGenerator():
     def __init__(
         self,  
         model_path='gpt-4', 
@@ -21,7 +21,7 @@ class GenerateSeedData():
         self.standard_seed_type = standard_seed_type
         self.delimiter = delimiter
         self.extractor = EntityExtraction()
-        self.queryLLM = QueryLLM(model_path)
+        self.queryLLM = LLMClient(model_path)
 
 
     def get_political_names(self, prompt, minResults=5, retryCnt=3):
@@ -37,7 +37,7 @@ class GenerateSeedData():
 
     def get_statement(self, name):
         validator = StatementValidator()
-        prompt = f"Please list a one sentence statement about {name}. Please format the statements as follows (one line per each name above):   {name} served in the role of <POSITION> starting in the year <Year>"
+        prompt = f"Please list a one sentence statement about {name}. Please format the statements as follows (one line per each name above):   {name} served in the role of <POSITION> starting in the year <YEAR>"
         statement = self.queryLLM.get_query_response(prompt, validator)
         print("statement: ", statement)
         return statement

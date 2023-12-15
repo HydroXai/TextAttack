@@ -12,7 +12,7 @@ from openai import OpenAI
 
 
 
-class QueryLLM():
+class LLMClient():
     def __init__(
         self,
         model_path='/media/d1/huggingface.co/models/meta-llama/Llama-2-7b-chat-hf/', 
