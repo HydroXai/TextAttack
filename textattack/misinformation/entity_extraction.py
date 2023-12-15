@@ -43,6 +43,10 @@ class EntityExtraction():
                     contiguous_chunks = []
                     tree_node_label = ""
             
+        if len(contiguous_chunks) > 0:
+            current_chunk = ' '.join(contiguous_chunks)
+            processed_chunks.append(current_chunk)
+
         return processed_chunks
 
 

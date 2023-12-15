@@ -1,7 +1,5 @@
 import collections
-
 import pytest
-
 import textattack
 
 
@@ -214,4 +212,36 @@ def test_get_stand_alone_names():
         "James Addison Baker III",
         "Bill Jones",
     ]
+
+
+def test_get_stand_alone_org_locations():
+    extractor = textattack.misinformation.EntityExtraction()
+
+    text = "New York City"
+    assert extractor.get_orgs_or_locations(text, "GPE") == [
+        "New York City",
+    ]
+
+    text = "Chicago, IL"
+    assert extractor.get_orgs_or_locations(text, "GPE") == [
+        "Chicago",
+        "IL",
+    ]
+
+    text = "Chicago, IL"
+    assert extractor.get_locations(text) == [
+        "Chicago",
+        "IL",
+    ]
+
+    text = "Microsoft Computer"
+    assert extractor.get_orgs_or_locations(text, "ORGANIZATION") == [
+        "Microsoft Computer",
+    ]
+
+    text = "The Senate"
+    assert extractor.get_orgs_or_locations(text, "ORGANIZATION") == [
+        "Senate",
+    ]
+
 

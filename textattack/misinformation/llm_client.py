@@ -50,14 +50,12 @@ class LLMClient():
             ]
         )
 
-        # print("da message: ", completion.choices[0].message.content)
-
         return completion.choices[0].message.content
 
 
     def get_query_response(self, prompt, validator):
-        print("Querying LLM with prompt: ")
-        print(f"\t{prompt}")
+        # print("Querying LLM with prompt: ")
+        # print(f"\t{prompt}")
         cnt = 0
         while True:
             print("Query attempt number " + str(cnt))
