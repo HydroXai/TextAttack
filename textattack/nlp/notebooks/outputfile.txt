@@ -1,0 +1,47 @@
+text,value
+Barack Obama served in the role of President of the United States starting in the year 2009.:::Joseph R. Biden Jr served in the role of President of the United States starting in the year 2021.,value
+text,value
+Ronald Reagan served in the role of President of the United States starting in the year 1981.:::George H.W served in the role of Vice President of the United States starting in the year 1981.
+George H.W served in the role of President of the United States starting in the year 1989.
+George H.W served in the role of Director of Central Intelligence starting in the year 1976.
+George H.W served in the role of United Nations Ambassador starting in the year 1971.
+George H.W served in the role of Chief of the U.S. Liaison Office to the People's Republic of China starting in the year 1974.,value
+text,value
+Barack Obama served in the role of President of the United States starting in the year 2009.:::Joseph R. Biden Jr served in the role of President of the United States starting in the year 2021.,value
+text,value
+Barack Obama served in the role of President of the United States starting in the year 2009.:::Joseph R. Biden Jr served in the role of President of the United States starting in the year 2021.,value
+text,value
+Ronald Reagan served in the role of President of the United States starting in the year 1981.:::George H.W served in the role of U.S. Ambassador to the United Nations starting in the year 1971. 
+
+George H.W served in the role of U.S. Vice President starting in the year 1981. 
+
+George H.W served in the role of U.S. President starting in the year 1989. 
+
+George H.W served in the role of Director of Central Intelligence starting in the year 1976. 
+
+George H.W served in the role of Chairman of The Republican National Committee starting in the year 1973.,value
+Barack Obama served in the role of President of the United States starting in the year 2009.:::Joseph R. Biden Jr served in the role of Vice President of the United States starting in the year 2009.
+Joseph R. Biden Jr served in the role of Senator from Delaware starting in the year 1973. 
+Joseph R. Biden Jr served in the role of President of the United States starting in the year 2021.,value
+text,value
+Barack Obama served in the role of President of the United States starting in the year 2009.:::Joseph R. Biden Jr served in the role of Vice President of the United States starting in the year 2009.,value
+Hillary Clinton served in the role of U.S. Secretary of State starting in the year 2009.:::Bill Clinton served in the role of President of the United States starting in the year 1993.,value
+Ronald Reagan served in the role of President of the United States starting in the year 1981.:::George H. W. Bush served in the role of President of the United States starting in the year 1989.,value
+Donald Trump served in the role of President of the United States starting in the year 2017.:::Rudy Giuliani served in the role of Mayor of New York City starting in the year 1994.,value
+Joe Biden served in the role of Vice President of the United States starting in the year 2009.:::Kamala Harris served in the role of Vice President of the United States starting in the year 2021.,value
+Nancy Pelosi served in the role of Speaker of the United States House of Representatives starting in the year 2007.:::Dianne Feinstein served in the role of U.S. Senator from California starting in the year 1992.,value
+George H.W served in the role of Vice President of the United States starting in the year 1981. 
+George H.W served in the role of President of the United States starting in the year 1989.
+George H.W served in the role of Director of Central Intelligence starting in the year 1976.
+George H.W served in the role of United States Ambassador to the United Nations starting in the year 1971.
+George H.W served in the role of Chairman of the Republican National Committee starting in the year 1973.
+George H.W served in the role of United States Envoy to China starting in the year 1974.
+George H.W served in the role of United States Ambassador to the United Nations starting in the year 1971.
+George H.W served in the role of United States Congressman for Texas's 7th congressional district starting in the year 1967. 
+George H.W served in the role of Member of the U.S. House of Representatives from Texas's 7th district starting in the year 1967.:::James Addison Baker III served in the role of White House Chief of Staff starting in the year 1981.
+James Addison Baker III served in the role of United States Secretary of the Treasury starting in the year 1985.
+James Addison Baker III served in the role of United States Secretary of State starting in the year 1989.,value
+Dick Cheney served in the role of Vice President of the United States starting in the year 2001.:::George W. Bush served in the role of President of the United States starting in the year 2001.,value
+Al Gore served in the role of Vice President of the United States starting in the year 1993.:::Bill Clinton served in the role of President of the United States starting in the year 1993.,value
+Bill Clinton served in the role of President of the United States starting in the year 1993.:::Hillary Rodham Clinton served in the role of United States Secretary of State starting in the year 2009.,value
+Sarah Palin served in the role of Governor of Alaska starting in the year 2006.:::John McCain served in the role of United States Senator for Arizona starting in the year 1987.,value
