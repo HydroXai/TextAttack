@@ -4,7 +4,7 @@ GenerateSeedData class
 
 
 from entity_extraction import EntityExtraction
-from textattack.nlp.llm_client import LLMClient
+from textattack.misinformation.llm_client import LLMClient
 
 from abc import ABC, abstractmethod 
 

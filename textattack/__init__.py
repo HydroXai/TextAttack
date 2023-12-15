@@ -31,7 +31,7 @@ from . import (
     loggers,
     metrics,
     models,
-    nlp,
+    misinformation,
     search_methods,
     shared,
     transformations,

@@ -6,7 +6,7 @@ SeedData CLI class
 import sys
 import argparse
 
-from textattack.nlp.seed_data_generator import SeedDataGenerator
+from textattack.misinformation.seed_data_generator import SeedDataGenerator
 
 
 

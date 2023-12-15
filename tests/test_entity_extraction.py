@@ -9,19 +9,19 @@ raw_text_1 = "When I walk down the streets of San Francisco, occasionally Nancy 
 
 @pytest.fixture
 def extracted_text_persons():
-    extractor = textattack.nlp.EntityExtraction()
+    extractor = textattack.misinformation.EntityExtraction()
     result = extractor.get_full_names(text=raw_text_1)
     return result
 
 @pytest.fixture
 def extracted_text_persons_explicit():
-    extractor = textattack.nlp.EntityExtraction()
+    extractor = textattack.misinformation.EntityExtraction()
     result = extractor.get_full_names(text=raw_text_1)
     return result
 
 @pytest.fixture # Geo Political Entity
 def extracted_text_gpe():
-    extractor = textattack.nlp.EntityExtraction()
+    extractor = textattack.misinformation.EntityExtraction()
     result = extractor.get_orgs_or_locations(text=raw_text_1, entity_type="GPE")
     return result
 
@@ -29,7 +29,7 @@ raw_text_2 = "Several cities in California, such as the cities of Bakersfield, O
 
 @pytest.fixture # Geo Political Entity
 def extracted_text_gpe_several():
-    extractor = textattack.nlp.EntityExtraction()
+    extractor = textattack.misinformation.EntityExtraction()
     result = extractor.get_orgs_or_locations(text=raw_text_2, entity_type="GPE")
     return result
 
@@ -37,14 +37,14 @@ raw_text_3 = "When I walk down the streets of San Francisco, occasionally Nancy 
 
 @pytest.fixture
 def extracted_full_names():
-    extractor = textattack.nlp.EntityExtraction()
+    extractor = textattack.misinformation.EntityExtraction()
     result = extractor.get_full_names(text=raw_text_3)
     return result
 
 
 @pytest.fixture
 def extracted_get_locations():
-    extractor = textattack.nlp.EntityExtraction()
+    extractor = textattack.misinformation.EntityExtraction()
     result = extractor.get_locations(text=raw_text_3)
     return result
 
@@ -53,7 +53,7 @@ raw_text_4 = "Bill Gates no longer works at Microsoft Corp, because he retired"
 
 @pytest.fixture
 def extracted_get_organizations():
-    extractor = textattack.nlp.EntityExtraction()
+    extractor = textattack.misinformation.EntityExtraction()
     result = extractor.get_organizations(text=raw_text_4)
     return result
 
@@ -62,7 +62,7 @@ raw_text_5 = "William J. Clinton is the wife of Hillary Clinton, who later becam
 
 @pytest.fixture
 def extracted_just_names1():
-    extractor = textattack.nlp.EntityExtraction()
+    extractor = textattack.misinformation.EntityExtraction()
     result = extractor.get_full_names(text=raw_text_5)
     return result
 
@@ -71,7 +71,7 @@ raw_text_6 = "George W. Bush was the President and Dick Cheney was the Vice Pres
 
 @pytest.fixture
 def extracted_just_names2():
-    extractor = textattack.nlp.EntityExtraction()
+    extractor = textattack.misinformation.EntityExtraction()
     result = extractor.get_full_names(text=raw_text_6)
     return result
 
@@ -80,7 +80,7 @@ raw_text_7 = "Andrew Ross Sorokin is a journalist"
 
 @pytest.fixture
 def extracted_just_names3():
-    extractor = textattack.nlp.EntityExtraction()
+    extractor = textattack.misinformation.EntityExtraction()
     result = extractor.get_full_names(text=raw_text_7)
     return result
 
@@ -145,7 +145,7 @@ def test_get_just_full_names3(extracted_just_names3):
     ]
 
 def test_is_proper_noun():
-    extractor = textattack.nlp.EntityExtraction()
+    extractor = textattack.misinformation.EntityExtraction()
     assert extractor.is_proper_noun(text="Uncle") == False
     assert extractor.is_proper_noun(text="sister") == False
     assert extractor.is_proper_noun(text="Brother") == False
@@ -155,7 +155,7 @@ def test_is_proper_noun():
 
 
 def test_get_full_names_params():
-    extractor = textattack.nlp.EntityExtraction()
+    extractor = textattack.misinformation.EntityExtraction()
 
     names = ["Billy Bob", "Thorton", "John Doe"]
     assert extractor.dedup_full_names(names=names, uniqueNames=True) == [
@@ -180,7 +180,7 @@ def test_get_full_names_params():
 
 
 def test_get_stand_alone_names():
-    extractor = textattack.nlp.EntityExtraction()
+    extractor = textattack.misinformation.EntityExtraction()
 
     text = "His name is James Addison Baker and he lives here."
     assert extractor.get_unique_full_names(text) == [

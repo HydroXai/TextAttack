@@ -8,7 +8,7 @@ from textattack.shared import AttackedText
 
 from .sentence_transformation import SentenceTransformation
 
-from textattack.nlp import EntityExtraction
+from textattack.misinformation import EntityExtraction
 
 
 class PairedTruthsTransformation(SentenceTransformation):
