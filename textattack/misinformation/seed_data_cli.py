@@ -1,12 +1,12 @@
 """
-SeedAttackData class
+SeedData CLI class
 """
 
 
 import sys
 import argparse
 
-from generate_seed_data import GenerateSeedData
+from textattack.misinformation.seed_data_generator import SeedDataGenerator
 
 
 
@@ -36,12 +36,12 @@ if __name__ == '__main__':
     print("")
     print(f"Seeding data with the following model: \"{model_path}\"")
 
-    seeder = GenerateSeedData(model_path=model_path, 
-                            output_file=output_file,
+    seeder = SeedDataGenerator(model_path=model_path, 
                             standard_seed_type=standard_seed_type,
                             )
     
-    seeder.generate_data(name_cnt=attack_example_count)
+    seeder.generate_data(name_cnt=attack_example_count,
+                         output_file=output_file)
 
 
     

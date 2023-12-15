@@ -3,25 +3,25 @@ GenerateSeedData class
 """
 
 
+import os
+
 from entity_extraction import EntityExtraction
-from query_llm import QueryLLM
+from textattack.misinformation.llm_client import LLMClient
 
 from abc import ABC, abstractmethod 
 
 
-class GenerateSeedData():
+class SeedDataGenerator():
     def __init__(
         self,  
         model_path='gpt-4', 
-        output_file='outputfile.txt',
         standard_seed_type='US_POLITICS',
         delimiter=":::"
     ):
-        self.output_file = output_file
         self.standard_seed_type = standard_seed_type
         self.delimiter = delimiter
         self.extractor = EntityExtraction()
-        self.queryLLM = QueryLLM(model_path)
+        self.queryLLM = LLMClient(model_path)
 
 
     def get_political_names(self, prompt, minResults=5, retryCnt=3):
@@ -36,10 +36,9 @@ class GenerateSeedData():
     
 
     def get_statement(self, name):
-        validator = StatementValidator()
-        prompt = f"Please list a one sentence statement about {name}. Please format the statements as follows (one line per each name above):   {name} served in the role of <POSITION> starting in the year <Year>"
+        validator = StatementValidator(max_response_length=175)
+        prompt = f"Please list a one sentence statement about {name}. Please format the statements as follows (one line per each name above):   {name} served in the role of <POSITION> starting in the year <YEAR>"
         statement = self.queryLLM.get_query_response(prompt, validator)
-        print("statement: ", statement)
         return statement
     
 
@@ -61,8 +60,11 @@ class GenerateSeedData():
 
     def generate_data(self, name_cnt=10, output_file="outputfile.txt", standard_seed_type="US_POLITICS"):
         print("Generating seed data")
-        fileHandle = open(output_file, "a")
-        fileHandle.write("text,value\n")
+        if os.path.isfile(output_file):
+            fileHandle = open(output_file, "a")
+        else: 
+            fileHandle = open(output_file, "a")
+            fileHandle.write("text,value\n")
 
 
         if standard_seed_type == 'US_POLITICS':
@@ -72,30 +74,27 @@ class GenerateSeedData():
             print("names: ", names)
             # name_pairs = []
             for name in names:
-                print("")
-                print("Politician name: ", name)
+                # print("")
+                # print("Politician name: ", name)
                 associates = self.get_political_associate(name)
-                print("Politician associates: ", associates)
+                # print("Politician associates: ", associates)
                 associates = [item for item in associates if item not in {name}]
-                print("new associates: ", associates)
+                # print("new associates: ", associates)
                 if len(associates) > 0:
                     # name_pairs.append([name, associates[0]])
                     name_pair = [name, associates[0]]
                     statement_pair = self.get_pair_statements(name_pair)
                     if len(statement_pair) == 2:
                         # Write to file
-                        paired_statement_line = statement_pair[0] + self.delimiter + statement_pair[1] + ",value\n"
-                        print("paired_statement_line: ", paired_statement_line)
+                        statement_1 = statement_pair[0].strip().strip("\n")
+                        statement_2 = statement_pair[1].strip().strip("\n")
+                        paired_statement_line = "\"" + statement_1 + self.delimiter + statement_2 + "\",value\n"
+                        # print("paired_statement_line: ", paired_statement_line)
                         fileHandle.write(paired_statement_line)
-
-                # Write 
-            # print("pairs: ", name_pairs)
 
         fileHandle.close()
 
 
-
-    
 
 
 
@@ -138,10 +137,13 @@ class FullNameValidator(BaseValidator):
         return self.names
     
 
+###
+# There should be one statement and it should have a maximum number of characters.
 class StatementValidator(BaseValidator):
-    def __init__(self, minResults=1, retryCnt=3) -> None:
+    def __init__(self, max_response_length=175, minResults=1, retryCnt=3) -> None:
         super().__init__()
         self.extractor = EntityExtraction()
+        self.max_response_length = max_response_length
         self.names = []
         self.minResults = minResults
         self.retryCnt = retryCnt
@@ -154,14 +156,18 @@ class StatementValidator(BaseValidator):
 
 
     def is_valid_or_finished(self):
-        if len(self.names) < int(self.minResults) and int(self.retryCnt) > 0:
+        if len(self.queryResponse) > 175 and int(self.retryCnt) > 0:
             self.retryCnt -= 1
             return False
         else:
             return True
 
 
+    # If queryResponse length exceeds max_response_length, then return an empty string.
     def get_response(self):
+        if len(self.queryResponse) > self.max_response_length:
+            return ""
+        
         return self.queryResponse
 
 

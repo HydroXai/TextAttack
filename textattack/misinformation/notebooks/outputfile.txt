@@ -1,0 +1,27 @@
+text,value
+"George H.W served in the role of Vice President of the United States starting in the year 1981.
+George H.W served in the role of the 41st President of the United States starting in the year 1989.
+George H.W served in the role of the U.S. Ambassador to the United Nations starting in the year 1971.
+George H.W served in the role of the Director of Central Intelligence starting in the year 1976.:::James Baker served in the role of Chief of Staff for President Ronald Reagan starting in the year 1981.",value
+"Ronald Reagan served in the role of President of the United States starting in the year 1981.:::George H. W. Bush served in the role of President of the United States starting in the year 1989.",value
+"Bill Clinton served in the role of President of the United States starting in the year 1993.:::Hillary Rodham Clinton served in the role of First Lady of the United States starting in the year 1993.",value
+"Barack Obama served in the role of President of the United States starting in the year 2009.:::Joseph R. Biden Jr served in the role of President of the United States starting in the year 2021.",value
+"Donald Trump served in the role of President of the United States starting in the year 2017.:::Michael Richard Pence served in the role of Vice President of the United States starting in the year 2017.",value
+"Hillary Clinton served in the role of United States Secretary of State starting in the year 2009.:::Bill Clinton served in the role of President of the United States starting in the year 1993.",value
+"Nancy Pelosi served in the role of Speaker of the United States House of Representatives starting in the year 2007.:::Adam Schiff served in the role of United States Representative for California's 28th congressional district starting in the year 2013.",value
+"Joe Biden served in the role of President of the United States starting in the year 2021.:::Kamala Harris served in the role of Vice President of the United States starting in the year 2021.",value
+"Sarah Palin served in the role of Governor of Alaska starting in the year 2006.:::John McCain served in the role of United States Senator for Arizona starting in the year 1987.",value
+"Al Gore served in the role of Vice President of the United States starting in the year 1993.:::Joseph Lieberman served in the role of United States Senator from Connecticut starting in the year 1989.",value
+"Dick Cheney served in the role of Vice President of the United States starting in the year 2001.:::George W. Bush served in the role of President of the United States starting in the year 2001.",value
+"Barack Obama served in the role of President of the United States starting in the year 2009.:::Joseph R. Biden served in the role of Vice President of the United States starting in the year 2009.",value
+"Joe Biden served in the role of President of the United States starting in the year 2021.:::Kamala Harris served in the role of Vice President of the United States starting in the year 2021.",value
+"Donald Trump served in the role of President of the United States starting in the year 2017.:::Rudy Giuliani served in the role of Mayor of New York City starting in the year 1994.",value
+"Hillary Clinton served in the role of United States Secretary of State starting in the year 2009.:::William Jefferson Clinton served in the role of President of the United States starting in the year 1993.",value
+"Bill Clinton served in the role of President of the United States starting in the year 1993.:::Hillary Rodham Clinton served in the role of United States Secretary of State starting in the year 2009.",value
+"Al Gore served in the role of Vice President of the United States starting in the year 1993.:::Joseph Lieberman served in the role of United States Senator from Connecticut starting in the year 1989.",value
+"Nancy Pelosi served in the role of Speaker of the United States House of Representatives starting in the year 2007.:::Adam Schiff served in the role of Chairman of the House Intelligence Committee starting in the year 2019.",value
+"Sarah Palin served in the role of Governor of Alaska starting in the year 2006.:::John McCain served in the role of United States Senator from Arizona starting in the year 1987.",value
+"Ronald Reagan served in the role of President of the United States starting in the year 1981.:::George H. W. Bush served in the role of President of the United States starting in the year 1989.",value
+"Dick Cheney served in the role of Vice President of the United States starting in the year 2001.:::George W. Bush served in the role of President of the United States starting in the year 2001.",value
+"John Kerry served in the role of United States Secretary of State starting in the year 2013.:::Joseph Robinette Biden Jr served in the role of Vice President of the United States starting in the year 2009.",value
+"Ted Cruz served in the role of U.S. Senator from Texas starting in the year 2013.:::Mike Lee served in the role of U.S. Senator from Utah starting in the year 2011.",value

@@ -43,6 +43,10 @@ class EntityExtraction():
                     contiguous_chunks = []
                     tree_node_label = ""
             
+        if len(contiguous_chunks) > 0:
+            current_chunk = ' '.join(contiguous_chunks)
+            processed_chunks.append(current_chunk)
+
         return processed_chunks
 
 
@@ -83,29 +87,22 @@ class EntityExtraction():
         full_names = []
         tree_node_label =  ""
 
-        # print("HERE 1")
         for chunk in chunks:
             if type(chunk) == Tree and chunk.label() == "PERSON":
-                # print("HERE 2, chunk: ", chunk)
                 current_chunk = ' '.join([token for token, pos in chunk.leaves()])
                 contiguous_chunks.append(current_chunk)
                 if len(tree_node_label) == 0:
                     tree_node_label = chunk.label()
-                # print("HERE 2a, chunk: ", chunk)
 
             else:
                 # First handle remaining contiguous chunks
                 if len(tree_node_label) > 0:
-                    # print("HERE 3, chunk: ", tree_node_label)
-                    # print("HERE 3a, chunk[1]:  --> length: ", len(chunk))
                     if len(chunk) > 1:
                         if chunk[1] == 'NNP' or chunk[1] == 'NNPS':
-                            # print("HERE 4, chunk[1]: ", chunk[1])
                             contiguous_chunks.append(chunk[0])
                             continue
 
                     # We can ignore the newest chunk as it is not part of the previous tree
-                    # print("HERE 5, contiguous_chunks: ", contiguous_chunks, "; chunk: ", chunk)
                     current_chunk = ' '.join(contiguous_chunks)
                     full_names.append(current_chunk)
                     contiguous_chunks = []
@@ -122,8 +119,6 @@ class EntityExtraction():
                 final_names.append(entity)
 
         final_names = self.dedup_full_names(final_names, uniqueNames)
-        # print("Extracted text: ", final_names)
-
         return final_names
     
 
