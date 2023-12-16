@@ -1,5 +1,5 @@
 """
-QueryLLM class
+LLMClient class
 """
 
 
@@ -15,7 +15,7 @@ from openai import OpenAI
 class LLMClient():
     def __init__(
         self,
-        model_path='/media/d1/huggingface.co/models/meta-llama/Llama-2-7b-chat-hf/', 
+        model_path='gpt-4', 
     ):
         self.model_path = model_path
         self.openai_client = OpenAI()
@@ -58,7 +58,6 @@ class LLMClient():
         # print(f"\t{prompt}")
         cnt = 0
         while True:
-            print("Query attempt number " + str(cnt))
             if self.model_path.startswith("gpt"):
                 query_response = self.submit_query_openai(prompt)
             else:       
@@ -67,6 +66,7 @@ class LLMClient():
             validator.process(query_response)
             if validator.is_valid_or_finished():
                 return validator.get_response()
+            
             cnt += 1
             
             

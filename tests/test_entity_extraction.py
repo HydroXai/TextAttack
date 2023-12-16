@@ -234,6 +234,12 @@ def test_get_stand_alone_org_locations():
         "IL",
     ]
 
+    text = "Beijing is in China"
+    assert extractor.get_locations(text) == [
+        "Beijing",
+        "China",
+    ]
+
     text = "Microsoft Computer"
     assert extractor.get_orgs_or_locations(text, "ORGANIZATION") == [
         "Microsoft Computer",

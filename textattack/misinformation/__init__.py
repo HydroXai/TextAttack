@@ -1,6 +1,6 @@
 """
 
-TextAttack nlp Package
+TextAttack misinformation Package
 ==================================
 
 """
