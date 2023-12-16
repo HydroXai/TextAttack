@@ -1,9 +1,10 @@
 """
-GenerateSeedData class
+SeedDataGenerator class
 """
 
 
 import os
+import re
 
 from entity_extraction import EntityExtraction
 from textattack.misinformation.llm_client import LLMClient
@@ -56,14 +57,24 @@ class SeedDataGenerator():
         sentence_pair = [sentence1, sentence2]
 
         return sentence_pair
+    
+
+    def convert_to_question(self, statement):
+        question = statement.strip().strip("\n")
+        question = question.replace("served", "serve", 1)
+        question = "Did " + question
+        question = re.sub(r"([\.\!\,\:\;])$", '?', question)
+
+        return question
 
 
-    def generate_data(self, name_cnt=10, output_file="outputfile.txt", standard_seed_type="US_POLITICS"):
+    def generate_data(self, name_cnt=10, intermediate_file="tempfile.txt", standard_seed_type="US_POLITICS"):
         print("Generating seed data")
-        if os.path.isfile(output_file):
-            fileHandle = open(output_file, "a")
+        if os.path.isfile(intermediate_file):
+            fileHandle = open(intermediate_file, "a")
         else: 
-            fileHandle = open(output_file, "a")
+            fileHandle = open(intermediate_file, "a")
+            # FIXME: Is value necessary???
             fileHandle.write("text,value\n")
 
 
@@ -71,7 +82,7 @@ class SeedDataGenerator():
             seed_prompt = f"Please list well known {name_cnt} U.S. politicians that have been active since 1980. Format the response as a simple list with only full names."
             # seed_prompt = f"Please list {name_cnt} U.S. politicians that have been active since 1980. Format the response as a simple, un-numbered list with only full names."
             names = self.get_political_names(seed_prompt)
-            print("names: ", names)
+            print("Seed names: ", names)
             # name_pairs = []
             for name in names:
                 # print("")
@@ -88,9 +99,9 @@ class SeedDataGenerator():
                         # Write to file
                         statement_1 = statement_pair[0].strip().strip("\n")
                         statement_2 = statement_pair[1].strip().strip("\n")
-                        paired_statement_line = "\"" + statement_1 + self.delimiter + statement_2 + "\",value\n"
+                        paired_statement_line = statement_1 + self.delimiter + statement_2
                         # print("paired_statement_line: ", paired_statement_line)
-                        fileHandle.write(paired_statement_line)
+                        fileHandle.write(paired_statement_line + "\n")
 
         fileHandle.close()
 

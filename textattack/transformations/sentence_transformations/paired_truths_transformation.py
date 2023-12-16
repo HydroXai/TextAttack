@@ -15,11 +15,12 @@ class PairedTruthsTransformation(SentenceTransformation):
     def __init__(
         self,  
         swap_persons=True,
-        delimiter=':::'
+        delimiter=':::',
     ):
         self.swap_persons = swap_persons
         self.delimiter = delimiter
         self.extractor = EntityExtraction()
+        super().__init__()
 
 
     def _get_transformations(self, current_text, indices_to_modify):
@@ -35,6 +36,9 @@ class PairedTruthsTransformation(SentenceTransformation):
 
         sentence1 = text_examples[0]
         sentence2 = text_examples[1]
+
+        # print("sentence1: ", sentence1)
+        # print("sentence2: ", sentence2)
 
         if self.swap_persons:
             # Swap names
