@@ -30,6 +30,8 @@ if __name__ == '__main__':
                         default="US_POLITICS")
     parser.add_argument('--attack_example_count', help='Number of attack examples',
                         default=30)
+    parser.add_argument('--percent_false', help='Percentage of attack examples that will be false (0.0 - 1.0)',
+                        default=0.5)
 
     args = parser.parse_args()
 
@@ -39,6 +41,7 @@ if __name__ == '__main__':
     output_file = args.output_file
     standard_seed_type = args.standard_seed_type
     attack_example_count = args.attack_example_count
+    percent_false = float(args.percent_false)
 
     delimiter = ":::"
 
@@ -54,37 +57,16 @@ if __name__ == '__main__':
     seeder.generate_data(name_cnt=attack_example_count,
                          intermediate_file=intermediate_file)
     
+
     print("")
     print(f"Perturbing data via the paired-truth approach.")
     print(f"Writing attack examples to file: {output_file}")
 
-    malformer = PairedTruthsMalformer(transformations_per_example=1)
+    seeder.generate_true_false_prompts(percent_false=percent_false,
+                                       truth_seed_file=intermediate_file,
+                                       output_file=output_file,
+                                       )
 
-    intermediateFileHandle = open(intermediate_file, "r")
-    fileLines = intermediateFileHandle.readlines()
-
-    outputFileHandle = open(output_file, "a")
-
-
-    for line in fileLines:
-        if line.startswith("text,value"):
-            continue
-
-        perturbed_examples = malformer.augment(line)
-        for example in perturbed_examples:
-            parts = example.split(delimiter, maxsplit=1)
-            if len(parts) != 2:
-                # Throw error
-                break
-            
-            part1 = seeder.convert_to_question(parts[0]) + " " + choice_prompt
-            part2 = seeder.convert_to_question(parts[1]) + " " + choice_prompt
-
-            outputFileHandle.write(part1 + "\n")
-            outputFileHandle.write(part2 + "\n")
-
-    intermediateFileHandle.close()
-    outputFileHandle.close()
 
 
     
