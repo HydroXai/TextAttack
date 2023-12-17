@@ -120,8 +120,6 @@ class SeedDataGenerator():
 
         outputFileHandle = open(output_file, "w")
 
-        print("Please use percent_false: ", percent_false)
-
         for line in fileLines:
             if line.startswith("text,value"):
                 continue
@@ -135,22 +133,20 @@ class SeedDataGenerator():
 
             perturbed_examples = malformer.augment(line)
             for example in perturbed_examples:
-                parts = example.split(self.delimiter, maxsplit=1)
-                if len(parts) != 2:
+                half_truths = example.split(self.delimiter, maxsplit=1)
+                if len(half_truths) != 2:
                     # Throw error
                     break
                 
-                part1 = self.convert_to_question(parts[0]) + " " + choice_prompt
-                part2 = self.convert_to_question(parts[1]) + " " + choice_prompt
+                half_truths_part1 = self.convert_to_question(half_truths[0]) + " " + choice_prompt
+                half_truths_part2 = self.convert_to_question(half_truths[1]) + " " + choice_prompt
 
             if random.random() < percent_false:
-                outputFileHandle.write("\"" + part1 + "\"FIXME\n")
-                outputFileHandle.write("\"" + part2 + "\"\n")
-                # FIXME: Append answer
+                outputFileHandle.write("\"" + half_truths_part1 + "\", B\n")
+                outputFileHandle.write("\"" + half_truths_part2 + "\", B\n")
             else:
-                outputFileHandle.write("\"" + truths_part1 + "\"\n")
-                outputFileHandle.write("\"" + truths_part2 + "\"\n")
-                # FIXME: Append answer
+                outputFileHandle.write("\"" + truths_part1 + "\", A\n")
+                outputFileHandle.write("\"" + truths_part2 + "\", A\n")
 
         seedFileHandle.close()
         outputFileHandle.close()

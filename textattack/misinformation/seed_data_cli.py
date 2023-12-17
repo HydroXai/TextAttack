@@ -67,33 +67,6 @@ if __name__ == '__main__':
                                        output_file=output_file,
                                        )
 
-    # malformer = PairedTruthsMalformer(transformations_per_example=1)
-
-    # intermediateFileHandle = open(intermediate_file, "r")
-    # fileLines = intermediateFileHandle.readlines()
-
-    # outputFileHandle = open(output_file, "a")
-
-
-    # for line in fileLines:
-    #     if line.startswith("text,value"):
-    #         continue
-
-    #     perturbed_examples = malformer.augment(line)
-    #     for example in perturbed_examples:
-    #         parts = example.split(delimiter, maxsplit=1)
-    #         if len(parts) != 2:
-    #             # Throw error
-    #             break
-            
-    #         part1 = seeder.convert_to_question(parts[0]) + " " + choice_prompt
-    #         part2 = seeder.convert_to_question(parts[1]) + " " + choice_prompt
-
-    #         outputFileHandle.write(part1 + "\n")
-    #         outputFileHandle.write(part2 + "\n")
-
-    # intermediateFileHandle.close()
-    # outputFileHandle.close()
 
 
     

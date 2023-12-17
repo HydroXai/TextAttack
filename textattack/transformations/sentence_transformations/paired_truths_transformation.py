@@ -30,6 +30,8 @@ class PairedTruthsTransformation(SentenceTransformation):
         text = current_text.text
         text_examples = text.split(self.delimiter, maxsplit=1)
 
+        # print("Line: ", text)
+
         if len(text_examples) == 1:
             transformed_texts.append(current_text)
             return transformed_texts
@@ -37,8 +39,8 @@ class PairedTruthsTransformation(SentenceTransformation):
         sentence1 = text_examples[0]
         sentence2 = text_examples[1]
 
-        # print("sentence1: ", sentence1)
-        # print("sentence2: ", sentence2)
+        # print("Orig sentence1: ", sentence1)
+        # print("Orig sentence2: ", sentence2)
 
         if self.swap_persons:
             # Swap names
@@ -58,11 +60,10 @@ class PairedTruthsTransformation(SentenceTransformation):
             # Merge sentences 
             new_sentence = sentence1_new + self.delimiter + sentence2_new
 
+            # print("New sentence1: ", sentence1_new)
+            # print("New sentence2: ", sentence2_new)
+
             # Add result 
-            transformed_texts.append(AttackedText(new_sentence))
-
-
-        # FIXME: Convert to query
-            
+            transformed_texts.append(AttackedText(new_sentence))            
 
         return transformed_texts
