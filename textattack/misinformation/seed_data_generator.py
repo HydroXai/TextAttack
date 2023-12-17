@@ -4,9 +4,11 @@ SeedDataGenerator class
 
 
 import os
+import random
 import re
 
 from entity_extraction import EntityExtraction
+from textattack.augmentation import PairedTruthsMalformer
 from textattack.misinformation.llm_client import LLMClient
 
 from abc import ABC, abstractmethod 
@@ -71,9 +73,9 @@ class SeedDataGenerator():
     def generate_data(self, name_cnt=10, intermediate_file="tempfile.txt", standard_seed_type="US_POLITICS"):
         print("Generating seed data")
         if os.path.isfile(intermediate_file):
-            fileHandle = open(intermediate_file, "a")
+            fileHandle = open(intermediate_file, "w")
         else: 
-            fileHandle = open(intermediate_file, "a")
+            fileHandle = open(intermediate_file, "w")
             # FIXME: Is value necessary???
             fileHandle.write("text,value\n")
 
@@ -107,7 +109,56 @@ class SeedDataGenerator():
 
 
 
+    def generate_true_false_prompts(self, percent_false=0.5, truth_seed_file="tempfile.txt", 
+                                    output_file="true_false_output.txt"):
+        
+        malformer = PairedTruthsMalformer(transformations_per_example=1)
+        choice_prompt = "Choices:   A. True   B. False"
 
+        seedFileHandle = open(truth_seed_file, "r")
+        fileLines = seedFileHandle.readlines()
+
+        outputFileHandle = open(output_file, "w")
+
+        print("Please use percent_false: ", percent_false)
+
+        for line in fileLines:
+            if line.startswith("text,value"):
+                continue
+
+            truths = line.split(self.delimiter, maxsplit=1)
+            if len(truths) != 2:
+                # Throw error
+                break
+            truths_part1 = self.convert_to_question(truths[0]) + " " + choice_prompt
+            truths_part2 = self.convert_to_question(truths[1]) + " " + choice_prompt
+
+            perturbed_examples = malformer.augment(line)
+            for example in perturbed_examples:
+                parts = example.split(self.delimiter, maxsplit=1)
+                if len(parts) != 2:
+                    # Throw error
+                    break
+                
+                part1 = self.convert_to_question(parts[0]) + " " + choice_prompt
+                part2 = self.convert_to_question(parts[1]) + " " + choice_prompt
+
+            if random.random() < percent_false:
+                outputFileHandle.write("\"" + part1 + "\"FIXME\n")
+                outputFileHandle.write("\"" + part2 + "\"\n")
+                # FIXME: Append answer
+            else:
+                outputFileHandle.write("\"" + truths_part1 + "\"\n")
+                outputFileHandle.write("\"" + truths_part2 + "\"\n")
+                # FIXME: Append answer
+
+        seedFileHandle.close()
+        outputFileHandle.close()
+
+
+
+###
+# Validator Classes
 
 class BaseValidator(ABC):
     @abstractmethod
