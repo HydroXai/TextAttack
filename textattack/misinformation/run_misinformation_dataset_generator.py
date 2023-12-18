@@ -1,5 +1,6 @@
 """
-SeedData Command Line Interface
+Misinformtaion Dataset Generator interface for use in 
+the HydroPrompt EvaluationDatasetGeneratorAgent. 
 """
 
 
