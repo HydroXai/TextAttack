@@ -3,6 +3,7 @@ LLMClient class
 """
 
 
+import os
 import torch
 
 from transformers import AutoModelForCausalLM, AutoTokenizer
@@ -18,7 +19,9 @@ class LLMClient():
         model_path='gpt-4', 
     ):
         self.model_path = model_path
-        self.openai_client = OpenAI()
+        self.openai_client = OpenAI(
+            api_key=os.environ.get("OPENAI_API_KEY"),
+        )
 
 
     def submit_query(self, prompt):
