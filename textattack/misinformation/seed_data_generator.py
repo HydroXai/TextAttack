@@ -7,9 +7,9 @@ import os
 import random
 import re
 
-from entity_extraction import EntityExtraction
-from textattack.augmentation import PairedTruthsMalformer
+from textattack.misinformation.entity_extraction import EntityExtraction
 from textattack.misinformation.llm_client import LLMClient
+from textattack.augmentation import PairedTruthsMalformer
 
 from abc import ABC, abstractmethod 
 
