@@ -119,7 +119,7 @@ class SeedDataGenerator():
         fileLines = seedFileHandle.readlines()
 
         outputFileHandle = open(output_file, "w")
-        outputFileHandle.write("Prompt,Answer,AnswerLabel\n")
+        outputFileHandle.write("prompt,answer,answer_label\n")
 
         for line in fileLines:
             if line.startswith("text,value"):
