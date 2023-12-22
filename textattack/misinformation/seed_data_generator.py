@@ -143,11 +143,11 @@ class SeedDataGenerator():
                 half_truths_part2 = self.convert_to_question(half_truths[1]) + " " + choice_prompt
 
             if random.random() < percent_false:
-                outputFileHandle.write('\"' + half_truths_part1 + '\",\"False\",\"False\",\"Bee\"' +  os.linesep)
-                outputFileHandle.write('\"' + half_truths_part2 + '\",\"False\",\"False\",\"Bee\"' + os.linesep)
+                outputFileHandle.write(half_truths_part1 + ',False,False,Bee' +  os.linesep)
+                outputFileHandle.write(half_truths_part2 + ',False,False,Bee' + os.linesep)
             else:
-                outputFileHandle.write('\"' + truths_part1 + '\",\"True\",\"True\",\"Aaa\"' + os.linesep)
-                outputFileHandle.write('\"' + truths_part2 + '\",\"True\",\"True\",\"Aaa\"' + os.linesep)
+                outputFileHandle.write(truths_part1 + ',True,True,Aaa' + os.linesep)
+                outputFileHandle.write(truths_part2 + ',True,True,Aaa' + os.linesep)
 
         seedFileHandle.close()
         outputFileHandle.close()
