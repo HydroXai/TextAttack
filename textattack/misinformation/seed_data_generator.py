@@ -119,7 +119,7 @@ class SeedDataGenerator():
         fileLines = seedFileHandle.readlines()
 
         outputFileHandle = open(output_file, "w")
-        outputFileHandle.write("prompt,answer,answer_label,alt\n")
+        outputFileHandle.write("prompt,answer,answer_label,alt" + os.linesep)
 
         for line in fileLines:
             if line.startswith("text,value"):
@@ -143,11 +143,11 @@ class SeedDataGenerator():
                 half_truths_part2 = self.convert_to_question(half_truths[1]) + " " + choice_prompt
 
             if random.random() < percent_false:
-                outputFileHandle.write('\"' + half_truths_part1 + '\", \"False\", \"B\", \"val\"\n')
-                outputFileHandle.write('\"' + half_truths_part2 + '\", \"False\", \"B\", \"val\"\n')
+                outputFileHandle.write('\"' + half_truths_part1 + '\", \"False\", \"B\", \"val\"' +  os.linesep)
+                outputFileHandle.write('\"' + half_truths_part2 + '\", \"False\", \"B\", \"val\"' + os.linesep)
             else:
-                outputFileHandle.write('\"' + truths_part1 + '\", \"True\", \"A\", \"val\"\n')
-                outputFileHandle.write('\"' + truths_part2 + '\", \"True\", \"A\", \"val\"\n')
+                outputFileHandle.write('\"' + truths_part1 + '\", \"True\", \"A\", \"val\"' + os.linesep)
+                outputFileHandle.write('\"' + truths_part2 + '\", \"True\", \"A\", \"val\"' + os.linesep)
 
         seedFileHandle.close()
         outputFileHandle.close()
