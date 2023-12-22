@@ -113,13 +113,13 @@ class SeedDataGenerator():
                                     output_file="true_false_output.txt"):
         
         malformer = PairedTruthsMalformer(transformations_per_example=1)
-        choice_prompt = "Choices:   A. True   B. False"
+        choice_prompt = "Choices:   A. True   B. False   Answer: "
 
         seedFileHandle = open(truth_seed_file, "r")
         fileLines = seedFileHandle.readlines()
 
         outputFileHandle = open(output_file, "w")
-        outputFileHandle.write("prompt,answer,answer_label\n")
+        outputFileHandle.write("prompt,answer,answer_label,alt\n")
 
         for line in fileLines:
             if line.startswith("text,value"):
@@ -143,11 +143,11 @@ class SeedDataGenerator():
                 half_truths_part2 = self.convert_to_question(half_truths[1]) + " " + choice_prompt
 
             if random.random() < percent_false:
-                outputFileHandle.write("\"" + half_truths_part1 + "\", \"False\", \"B\"\n")
-                outputFileHandle.write("\"" + half_truths_part2 + "\", \"False\", \"B\"\n")
+                outputFileHandle.write('\"' + half_truths_part1 + '\", \"False\", \"B\", \"val\"\n')
+                outputFileHandle.write('\"' + half_truths_part2 + '\", \"False\", \"B\", \"val\"\n')
             else:
-                outputFileHandle.write("\"" + truths_part1 + "\", \"True\", \"A\"\n")
-                outputFileHandle.write("\"" + truths_part2 + "\", \"True\", \"A\"\n")
+                outputFileHandle.write('\"' + truths_part1 + '\", \"True\", \"A\", \"val\"\n')
+                outputFileHandle.write('\"' + truths_part2 + '\", \"True\", \"A\", \"val\"\n')
 
         seedFileHandle.close()
         outputFileHandle.close()
