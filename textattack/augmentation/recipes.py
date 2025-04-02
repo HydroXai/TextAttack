@@ -5,6 +5,7 @@ Augmenter Recipes:
 Transformations and constraints can be used for simple NLP data augmentations. Here is a list of recipes for NLP data augmentations
 
 """
+
 import random
 
 from textattack.constraints.pre_transformation import (
@@ -36,7 +37,7 @@ class EasyDataAugmenter(Augmenter):
     https://arxiv.org/abs/1901.11196
     """
 
-    def __init__(self, pct_words_to_swap=0.1, transformations_per_example=4):
+    def __init__(self, pct_words_to_swap=0.1, transformations_per_example=4, **kwargs):
         assert 0.0 <= pct_words_to_swap <= 1.0, "pct_words_to_swap must be in [0., 1.]"
         assert (
             transformations_per_example > 0
@@ -48,17 +49,22 @@ class EasyDataAugmenter(Augmenter):
         self.synonym_replacement = WordNetAugmenter(
             pct_words_to_swap=pct_words_to_swap,
             transformations_per_example=n_aug_each,
+            **kwargs,
         )
         self.random_deletion = DeletionAugmenter(
             pct_words_to_swap=pct_words_to_swap,
             transformations_per_example=n_aug_each,
+            **kwargs,
         )
         self.random_swap = SwapAugmenter(
             pct_words_to_swap=pct_words_to_swap,
             transformations_per_example=n_aug_each,
+            **kwargs,
         )
         self.random_insertion = SynonymInsertionAugmenter(
-            pct_words_to_swap=pct_words_to_swap, transformations_per_example=n_aug_each
+            pct_words_to_swap=pct_words_to_swap,
+            transformations_per_example=n_aug_each,
+            **kwargs,
         )
 
     def augment(self, text):
@@ -262,4 +268,16 @@ class BackTranslationAugmenter(Augmenter):
         from textattack.transformations.sentence_transformations import BackTranslation
 
         transformation = BackTranslation(chained_back_translation=5)
+        super().__init__(transformation, **kwargs)
+
+
+class BackTranscriptionAugmenter(Augmenter):
+    """Sentence level augmentation that uses back transcription (TTS+ASR)."""
+
+    def __init__(self, **kwargs):
+        from textattack.transformations.sentence_transformations import (
+            BackTranscription,
+        )
+
+        transformation = BackTranscription()
         super().__init__(transformation, **kwargs)
